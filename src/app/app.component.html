@@ -28,10 +28,61 @@
           </li>
         </div>
       </ul>
+      <!--
+
+With <ng-template>, you can define template content that is only being rendered by Angular when you, whether directly or indirectly, specifically 
+  instruct it to do so, allowing you to have full control over how and when the content is displayed.
+
+Note that if you wrap content inside an <ng-template> without instructing Angular to render it, such content will not appear on a page. 
+  For example, see the following HTML code, when handling it Angular won't render the middle "Hip!" in the phrase "Hip! Hip! Hooray!" 
+  because of the surrounding <ng-template>.
+
+
+    <p>Hip!</p>
+<ng-template>
+  <p>Hip!</p>
+</ng-template>
+<p>Hooray!</p>
+
+
+-----------------other example-------------------
+
+<div class="lessons-list" *ngIf="lessons else loading">
+  ... 
+</div>
+
+<ng-template #loading>
+    <div>Loading...</div>
+</ng-template>
+
+
+This is a very common use of the ngIf/else functionality: we display an alternative loading template while waiting for the data to arrive from the backend.
+
+
+------------------------other example see bellow (with custom structural directives)----------------
+
+      -->
       <ng-template [ngIf]="onlyOdd">
         <p>Only odd</p>
       </ng-template>
       <p appBasicHighlight>Style me with basic highlight directive</p>
+      <!--here you can also use property binding without [], like defaultColor="yellow" (also leave the '' away)-->
+      <p appBetterHighlight [defaultColor]="'yellow'" [highlightColor]="'red'">Style me with basic highlight directive</p> <!--override the values defined in the .ts file-->
+    </div>
+  </div>
+  <!--using custom structural directive-->
+  <div class="row">
+    <div class="col-xs-12">
+      <p *appUnless="false">Condition false, display paragraph!</p>
+    </div>
+  </div>
+  <!--example for ngSwitch, another structural directive-->
+  <div class="row">
+    <div class="col-xs-12" [ngSwitch]="value"> <!--first do a property binding to ngSwitch-->
+      <p *ngSwitchCase="5">value is 5</p>
+      <p *ngSwitchCase="10">value is 10</p>
+      <p *ngSwitchCase="20">value is 20</p>
+      <p *ngSwitchDefault>value is default</p>
     </div>
   </div>
 </div>
